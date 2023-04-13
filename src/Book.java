@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class Book {
     private String bookName;
     private Author authorName;
@@ -33,15 +35,13 @@ public class Book {
         return "Название книги:"+getBookName()+"; Автор:"+authorName+"; Год выпуска:"+getYear();
     }
 
-    public boolean equals(Object other) {
-        if (this.getClass()!=other.getClass()) {
-            return false;
-        }
-        Book crimeAndPunishment = (Book) other;
-        return bookName.equals(crimeAndPunishment.bookName);
-    }
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Book book = (Book) o;
+        return year == book.year && Objects.equals(bookName, book.bookName) && Objects.equals(authorName, book.authorName);
+}
     public int hashCode() {
-            return java.util.Objects.hash(bookName);
+        return Objects.hash(bookName, authorName, year);
     }
-
 }
